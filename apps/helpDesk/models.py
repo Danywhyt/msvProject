@@ -1,41 +1,46 @@
 from django.db import models
-
+import datetime
 # Create your models here.
- 
-class Trabajo(models.Model):
-    fechaHora = models.DateTimeField(auto_now_add=True)
-    fechaHora = models.DateTimeField(null=True)
-    status = models.BooleanField()
-    observacion = models.TextField()
-    cobrado = models.BooleanField()
-    id_trabajador1 = models.IntegerField()
-    id_cliente1 = models.IntegerField()
 
+class Trabajador(models.Model):
+    nombre = models.CharField(max_length=150)
+    numero = models.IntegerField()
     def __str__(self):
-        return '%s %s %s' % (self.observacion,self.user,self.cliente)
+        return '%s' % (self.nombre)
+        
         
 class Cliente(models.Model):
     nombre = models.CharField(max_length=200)
-    rif = models.IntegerField()
+    rif = models.CharField(max_length=100)
     numero = models.IntegerField()
     correo = models.EmailField()
     def __str__ (self):
-        return '%s %s' % (self.nombre,self.correo)
+        return '%s %s %i %s' % (self.nombre,self.rif,self.numero,self.correo)
 
-class Bitacora(models.Model):
-    fecha_estado = models.DateTimeField(auto_now_add=True)
-    comentario = models.TextField()
-    monto = models.IntegerField()
-    id_trabajador2 = models.IntegerField()
-    id_trabajo = models.IntegerField()
-    id_estado = models.IntegerField()
-
-
-    def __str__(self):
-        return '%s' % (self.comentario)
 
 class Estados(models.Model):
     nombre = models.CharField(max_length= 100)
     def __str__(self):
         return '%s' %(self.nombre)
+
+ 
+class Trabajo(models.Model):
+    fechaHora = models.DateTimeField(auto_now_add=True)
+    fechaVisita = models.DateTimeField(null=True,blank=True)
+    status = models.BooleanField()
+    observacion = models.TextField()
+    cobrado = models.BooleanField()
+    id_trabajador = models.ForeignKey(Trabajador,null=True,blank=True,on_delete=models.CASCADE)
+    id_cliente = models.ForeignKey(Cliente,null=True,blank=True,on_delete=models.CASCADE)
+    def __str__(self):
+        return '%s %s' % (self.pk,self.id_cliente)
         
+class Bitacora(models.Model):
+    fecha_estado = models.DateTimeField(auto_now_add=True)
+    comentario = models.TextField()
+    monto = models.IntegerField()
+    id_trabajador = models.ManyToManyField(Trabajador)
+    id_trabajo = models.ForeignKey(Trabajo,null=True,blank=True,on_delete=models.CASCADE)
+    id_estado = models.ForeignKey(Estados,null=True,blank=True,on_delete=models.CASCADE)
+    def __str__(self):
+        return '%s' % (self.comentario)
