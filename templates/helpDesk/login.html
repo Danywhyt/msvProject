@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+
+
+{% block title %}
+    Iniciar Sesion
+{% endblock title %}
+
+{% block header %}
+    
+{% endblock header %}
+
+{% block content %}
+     <section class="login">
+          
+       <fieldset>
+           <legend>MSV</legend>
+        <form action="">
+           
+            <div class="datos">
+                
+                <input type="text" id="inputUser" placeholder="Usuario"> 
+
+                <input type="password" id="inputPass" placeholder="Contraseña">
+            </div>
+            
+            <div class="datos botones">
+                <input type="submit" value="Iniciar">
+                <input type="reset" value="Cancel">
+            </div>
+        </form>
+        </fieldset>
+        
+    </section>
+{% endblock content %}
+
+
+{% block footer %}
+    
+{% endblock footer %}

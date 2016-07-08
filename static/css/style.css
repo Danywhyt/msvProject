@@ -1,0 +1,131 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    height: 100vh;
+    width: 100%;
+    #background-image: url(../img/fondo1.jpg);
+    
+    #background-color: #222;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+    box-sizing: border-box;
+    
+}
+
+
+.login{
+    position: relative;
+    width: 90%;
+    height: 500px;
+    top: 40%;
+    left: 50%;
+    margin-left: -45%;
+    margin-top: -250px;
+    
+}
+
+.login fieldset{
+    background-color: rgba(0, 137, 255, 0.56);
+    height: 90%;
+    text-align: center;
+    padding: 30px;
+    border: 0px;
+    box-shadow: 15px 15px 12px 2px black;
+}
+
+.login fieldset legend{
+    height: 50px;
+    width: 90%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: 2px solid gray;
+    font-size: 40px;
+    line-height: 50px;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.5)
+    
+}
+
+.login form{
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.datos{
+    height: 50%;
+    font-size: 20px;
+    
+}
+
+.datos input{
+    width: 90%;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.65);
+    padding: 2px;
+    
+}
+.botones input{
+    color:black;
+    width: 100%;
+    height: 40%;
+    margin: 10px 0px ;
+    border-radius: 25px;
+    background-color: #fff;
+}
+.botones input:active{
+    border: 3px solid #000;
+}
+
+
+@media (min-width:400px){
+    .login{
+        
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        top:50%;
+    }
+    .datos input{
+        font-size: 30px;
+    }
+    
+}
+
+
+@media (min-width:700px){
+    .login{
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+    }
+}
+
+@media (min-width:800px){
+    .login{
+        max-width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+    }
+    
+    .login form .botones{
+        display: flex;
+        width: 100%;
+        
+    }
+    .botones input{
+        margin: 10px;
+    }
+
+}
