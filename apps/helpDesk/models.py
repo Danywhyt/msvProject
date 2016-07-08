@@ -27,7 +27,7 @@ class Estados(models.Model):
  
 class Trabajo(models.Model):
     fechaHora = models.DateTimeField(auto_now_add=True)
-    fechaVisita = models.DateTimeField(null=True,blank=True)
+    fechaVisita = models.DateField(null=True,blank=True)
     status = models.BooleanField()
     observacion = models.TextField()
     cobrado = models.BooleanField()

@@ -1,0 +1,60 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+    Nuevo Trabajo
+{% endblock title %}
+
+{% block header %}
+
+{% include "base/header.html" %}
+
+{% endblock header %}
+
+
+{% block content %}
+<div class="well well-lg">
+  <form class="form-horizontal">
+  <fieldset>
+    <legend>Llamadas</legend>
+    <div class="form-group">
+      <label for="id_id_cliente" class="col-lg-2 control-label">Cliente</label>
+      <div class="col-lg-10">
+        {{form.id_cliente}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="id_fechaVisita" class="col-lg-2 control-label">Fecha Visita</label>
+      <div class="col-lg-10">
+        {{form.fechaVisita}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="id_observacion" class="col-lg-2 control-label">Observacion</label>
+      <div class="col-lg-10">
+        {{form.observacion}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="id_id_trabajador" class="col-lg-2 control-label">Trabajador</label>
+      <div class="col-lg-10">
+        {{form.id_trabajador}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary">Registrar</button>
+        <button type="reset" class="btn btn-default">Cancel</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+
+
+{% endblock content %}
+
+{% block footer %}
+    
+{% endblock footer %}
