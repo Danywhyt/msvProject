@@ -14,9 +14,10 @@ class Cliente(models.Model):
     nombre = models.CharField(max_length=200)
     rif = models.CharField(max_length=100)
     numero = models.IntegerField()
+    direccion = models.TextField(blank=True,null=True)
     correo = models.EmailField()
     def __str__ (self):
-        return '%s %s %i %s' % (self.nombre,self.rif,self.numero,self.correo)
+        return '%s %s ' % (self.nombre,self.rif)
 
 
 class Estados(models.Model):
@@ -33,6 +34,7 @@ class Trabajo(models.Model):
     cobrado = models.BooleanField()
     id_trabajador = models.ForeignKey(Trabajador,null=True,blank=True,on_delete=models.CASCADE)
     id_cliente = models.ForeignKey(Cliente,null=True,blank=True,on_delete=models.CASCADE)
+    id_estado = models.ForeignKey(Estados,null=True,blank=True,on_delete=models.CASCADE)
     def __str__(self):
         return '%s %s' % (self.pk,self.id_cliente)
         

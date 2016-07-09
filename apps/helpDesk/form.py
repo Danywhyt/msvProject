@@ -1,5 +1,5 @@
 from django import  forms
-from apps.helpDesk.models import Trabajo
+from apps.helpDesk.models import Trabajo,Trabajador
 
 
 class  TrabajosForm(forms.ModelForm):
@@ -35,4 +35,26 @@ class  TrabajosForm(forms.ModelForm):
             'observacion':forms.Textarea(attrs={'class':'form-control','rows':'5'}),
             'cobrado':forms.CheckboxInput(attrs={'class':'form-control'}),
             'id_trabajador':forms.Select(attrs={'class':'form-control'}),
+        }
+
+
+class TrabajadorForm(forms.ModelForm):
+    class Meta:
+        model = Trabajador
+
+        fields = [
+            'nombre',
+            'clave',
+            'numero'
+        ]
+
+        labels = {
+            'nombre':'Nombre',
+            'clave':'Clave',
+            'numero':'Numero',
+        }
+        widgets={
+            'nombre':forms.TextInput(attrs={'class':'form-control','placeholder':'Nombre'}),
+            'clave':forms.TextInput(attrs={'class':'form-control','type':'password','placeholder':'Clave'}),
+            'numero':forms.NumberInput(attrs={'class':'form-control','placeholder':'Numero'}),
         }
