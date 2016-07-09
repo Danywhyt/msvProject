@@ -16,7 +16,7 @@ class Cliente(models.Model):
     numero = models.IntegerField()
     direccion = models.TextField()
     def __str__ (self):
-        return '%s %s %s' % (self.nombre,self.rif,self.direccion)
+        return '%s %s %s' % (self.rif,self.nombre,self.direccion)
 
 
 class Estados(models.Model):
@@ -33,7 +33,7 @@ class Trabajo(models.Model):
     cobrado = models.BooleanField()
     id_trabajador = models.ForeignKey(Trabajador,null=True,blank=True,on_delete=models.CASCADE)
     id_cliente = models.ForeignKey(Cliente,null=True,blank=True,on_delete=models.CASCADE)
-    id_estado = models.ForeignKey(Estados,null=True,blank=True,on_delete=models.CASCADE)
+    id_estado = models.ForeignKey(Estados,null=True,blank=True,on_delete=models.CASCADE,)
     def __str__(self):
         return '%s %s' % (self.pk,self.id_cliente)
         
@@ -41,7 +41,7 @@ class Bitacora(models.Model):
     fecha_estado = models.DateTimeField(auto_now_add=True)
     comentario = models.TextField()
     monto = models.IntegerField()
-    id_trabajador = models.ManyToManyField(Trabajador)
+    id_trabajador = models.ManyToManyField(Trabajador,null=True,blank=True)
     id_trabajo = models.ForeignKey(Trabajo,null=True,blank=True,on_delete=models.CASCADE)
     id_estado = models.ForeignKey(Estados,null=True,blank=True,on_delete=models.CASCADE)
     def __str__(self):

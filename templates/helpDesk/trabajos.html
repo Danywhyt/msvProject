@@ -59,7 +59,9 @@
         </th>
 
         <th>
-          {{trabajo.id_estado}}
+          {%if trabajo.id_estado != null%}
+            {{trabajo.id_estado}}
+          {%endif%}
         </th>
 
         <th>

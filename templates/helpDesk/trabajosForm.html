@@ -20,7 +20,9 @@
     <div class="form-group">
       <label for="id_id_cliente" class="col-lg-2 control-label">Cliente</label>
       <div class="col-lg-10">
+        
         {{form.id_cliente}}
+        
       </div>
     </div>
     <div class="form-group">
@@ -33,6 +35,12 @@
       <label for="id_observacion" class="col-lg-2 control-label">Observacion</label>
       <div class="col-lg-10">
         {{form.observacion}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="id_observacion" class="col-lg-2 control-label">Estado</label>
+      <div class="col-lg-10">
+        {{form.id_estado}}
       </div>
     </div>
 
@@ -53,7 +61,7 @@
 </form>
 </div>
 
-
+<script src="js/jscrip.js"></script>
 {% endblock content %}
 
 {% block footer %}

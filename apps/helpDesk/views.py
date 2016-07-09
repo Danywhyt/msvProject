@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from django.contrib.auth.decorators import login_required
-from apps.helpDesk.form import TrabajosForm,TrabajadorForm, EstadoForm, ClienteForm
+from apps.helpDesk.form import TrabajosForm,TrabajadorForm, EstadoForm, ClienteForm,BitacoraForm
 
-from apps.helpDesk.models import Trabajo,Trabajador,Estados,Cliente
+from apps.helpDesk.models import Trabajo,Trabajador,Estados,Cliente,Bitacora
 
 # Create your views here.
 
@@ -59,12 +59,15 @@ def clientes(request):
     }
     return render(request,'helpDesk/cliente.html',contexto)
 
-
 def trabajosCrear(request):
+
     if request.method == 'POST':
-        form = TrabajosForm(request.POST)
+        form = TrabajosForm(request.POST)   
+       
         if form.is_valid():
             form.save()
+        else:
+            return redirect('helpDesk:trabajosCrear')
         return redirect('helpDesk:trabajos')
     else:
         form = TrabajosForm()
@@ -104,3 +107,36 @@ def trabajosFinish(request,id_trabajo):
         print (trabajo.status)
     
     return redirect('helpDesk:trabajos')
+
+def msv(request):
+    trabajos = Trabajo.objects.all()
+    
+    contexto ={
+        'trabajos':trabajos
+    }
+    return render(request,'helpDesk/trabajos.html',contexto)
+
+
+
+
+def bitacora(request,id_trabajo):
+    
+    cliente = Trabajo.objects.filter(pk=4)
+    
+    trabajo = Bitacora.objects.filter(id_trabajo=id_trabajo)
+
+    if request.method == 'POST':
+        form = BitacoraForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            return redirect('helpDesk:bitacora')
+    else:
+        form = BitacoraForm()
+    contexto ={
+        'cliente':cliente,
+        'form':form,
+        'trabajo':trabajo,
+    }
+    
+    return render(request,'helpDesk/bitacora.html',contexto)

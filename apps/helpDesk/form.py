@@ -1,5 +1,5 @@
 from django import  forms
-from apps.helpDesk.models import Trabajo,Trabajador,Estados,Cliente
+from apps.helpDesk.models import Trabajo,Trabajador,Estados,Cliente,Bitacora
 
 
 class  TrabajosForm(forms.ModelForm):
@@ -8,12 +8,12 @@ class  TrabajosForm(forms.ModelForm):
         model = Trabajo
 
         fields=[
-            
             'id_cliente',
             'fechaVisita',
             'observacion',
             'cobrado',
             'status',
+            'id_estado',
             'id_trabajador',
 
         ]
@@ -26,15 +26,17 @@ class  TrabajosForm(forms.ModelForm):
             'observacion':'Observacion',
             'cobrado':'Cobrado',
             'id_trabajador':'Trabajador',
+            'id_estado':'Estado',
         }
         widgets = {
             
-            'id_cliente':forms.Select(attrs={'class':'form-control'}),
+            'id_cliente':forms.Select(attrs={'class':'form-control',}),
             'fechaVisita':forms.DateInput(attrs={'class':'form-control','type':'date'}) ,
             'status':forms.CheckboxInput(attrs={'class':'form-control','checked':'true'}),
             'observacion':forms.Textarea(attrs={'class':'form-control','rows':'5'}),
             'cobrado':forms.CheckboxInput(attrs={'class':'form-control'}),
             'id_trabajador':forms.Select(attrs={'class':'form-control'}),
+            'id_estado':forms.Select(attrs={'class':'form-control'}),
         }
 
 
@@ -94,3 +96,31 @@ class ClienteForm(forms.ModelForm):
             'direccion':forms.Textarea(attrs={'class':'form-control','placeholder':'Direccion','rows':'1','max-height':'50px'}),
            
         }        
+
+
+class BitacoraForm(forms.ModelForm):
+    class Meta:
+        model = Bitacora
+        fields=[
+            'comentario',
+            'monto',
+            'id_trabajador',
+            'id_trabajo',
+            'id_estado',
+        ]
+        labels={
+            'comentario': 'Comentario',
+            'monto': 'Monto',
+            'id_trabajador':'Trabajador',
+            'id_trabajo':'Cliente',
+            'id_estado':'Estado',
+            }
+
+        widgets={
+            
+        'comentario':forms.Textarea(attrs={'class':'form-control','placeholder':'Direccion','rows':'1','max-height':'50px'}),
+        'monto': forms.NumberInput(attrs={'class':'form-control','placeholder':'Numero'}),
+        'id_trabajador':forms.Select(attrs={'class':'form-control'}),
+        'id_trabajo':forms.Select(attrs={'class':'form-control'}),
+        'id_estado':forms.Select(attrs={'class':'form-control'}),
+        }
