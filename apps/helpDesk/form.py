@@ -1,5 +1,5 @@
 from django import  forms
-from apps.helpDesk.models import Trabajo,Trabajador
+from apps.helpDesk.models import Trabajo,Trabajador,Estados,Cliente
 
 
 class  TrabajosForm(forms.ModelForm):
@@ -58,3 +58,39 @@ class TrabajadorForm(forms.ModelForm):
             'clave':forms.TextInput(attrs={'class':'form-control','type':'password','placeholder':'Clave'}),
             'numero':forms.NumberInput(attrs={'class':'form-control','placeholder':'Numero'}),
         }
+
+class EstadoForm(forms.ModelForm):
+    class Meta:
+        model = Estados
+        fields = [ 'nombre']
+        labels = {
+            'nombre':'nombre',
+        }
+        widgets = {
+            'nombre':forms.TextInput(attrs={'class':'form-control','placeholder':'Nombre'})
+        }
+
+class ClienteForm(forms.ModelForm):
+    class Meta():
+        model = Cliente
+
+        fields = [
+            'nombre',
+            'rif',
+            'numero',
+            'direccion',
+        ]
+
+        labels = {
+            'nombre':'Nombre',
+            'rif':'Rif',
+            'numero':'Numero',
+            'direcion':'Direccion',
+        }
+        widgets={
+            'nombre':forms.TextInput(attrs={'class':'form-control','placeholder':'Nombre'}),
+            'rif':forms.TextInput(attrs={'class':'form-control','placeholder':'RIF'}),
+            'numero':forms.NumberInput(attrs={'class':'form-control','placeholder':'Numero'}),
+            'direccion':forms.Textarea(attrs={'class':'form-control','placeholder':'Direccion','rows':'1'}),
+           
+        }        

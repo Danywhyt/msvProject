@@ -14,10 +14,9 @@ class Cliente(models.Model):
     nombre = models.CharField(max_length=200)
     rif = models.CharField(max_length=100)
     numero = models.IntegerField()
-    direccion = models.TextField(blank=True,null=True)
-    correo = models.EmailField()
+    direccion = models.TextField()
     def __str__ (self):
-        return '%s %s ' % (self.nombre,self.rif)
+        return '%s %s %s' % (self.nombre,self.rif,self.direccion)
 
 
 class Estados(models.Model):
