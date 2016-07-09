@@ -6,6 +6,8 @@ from apps.helpDesk.views import (
         trabajosCrear,
         estados,
         clientes,
+        trabajosEdit,
+        trabajosFinish,
 )
 urlpatterns = [
     url(r'^$',index), 
@@ -13,6 +15,8 @@ urlpatterns = [
     url(r'^estados$',estados,name='status'), 
     url(r'^clientes$',clientes,name='cliente'), 
     url(r'^trabajos$', trabajos, name='trabajos'), 
-    url(r'^nuevo$', trabajosCrear, name='trabajosCrear'), 
+    url(r'^nuevo$', trabajosCrear, name='trabajosCrear'),
+    url(r'^edit/(?P<id_trabajo>\d+)/$', trabajosEdit, name='trabajosEdit'), 
+    url(r'^finalizar/(?P<id_trabajo>\d+)/$', trabajosFinish, name='trabajosFinish'), 
     
 ]

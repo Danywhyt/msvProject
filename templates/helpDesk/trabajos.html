@@ -15,7 +15,7 @@
 {% block content %}
 
     {% if trabajos %}
-    <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Agregar Trabajo </a>
+    <a href="{% url 'helpDesk:trabajosCrear'%}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Agregar Trabajo </a>
     <table class="table table-striped table-hover ">
   <thead>
     <tr>
@@ -69,10 +69,10 @@
           <p>Monto</p>
         </th>
         <th>
-          <a href="">Bitacora</a>
+          <a href="{% url 'helpDesk:trabajosEdit' trabajo.id %}" class='btn btn-primary'>Cambiar</a>
         </th>
         <th>
-          <a href="">Monto</a>
+          <a href="{% url 'helpDesk:trabajosFinish' trabajo.id %}" class='btn btn-primary'>Finalizar</a>
         </th>
 
       </tr>

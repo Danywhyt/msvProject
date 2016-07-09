@@ -71,9 +71,36 @@ def trabajosCrear(request):
     return render(request,'helpDesk/TrabajosForm.html',{'form':form})
 
 def trabajos(request):
-    trabajos = Trabajo.objects.all()
+    trabajos = Trabajo.objects.filter(status=False)
+    
     contexto ={
         'trabajos':trabajos
     }
     return render(request,'helpDesk/trabajos.html',contexto)
 
+def trabajosEdit(request,id_trabajo):
+    trabajo = Trabajo.objects.get(id=id_trabajo)
+    if request.method == 'GET':
+        form = TrabajosForm(instance=trabajo)
+    else:
+        form = TrabajosForm(request.POST,instance = trabajo)
+        if form.is_valid():
+            form.save()
+        return redirect('helpDesk:trabajos')
+    
+    return render(request,'helpDesk/trabajosForm.html',{'form':form})
+
+def trabajosFinish(request,id_trabajo):
+    trabajo = Trabajo.objects.get(id=id_trabajo)
+    form = Trabajo.objects.all()
+    
+    if request.method== 'GET':
+        if trabajo.status:
+            trabajo.status = False
+        else:
+            trabajo.status = True
+            
+        trabajo.save()
+        print (trabajo.status)
+    
+    return redirect('helpDesk:trabajos')

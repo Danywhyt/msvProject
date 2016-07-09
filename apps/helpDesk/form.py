@@ -91,6 +91,6 @@ class ClienteForm(forms.ModelForm):
             'nombre':forms.TextInput(attrs={'class':'form-control','placeholder':'Nombre'}),
             'rif':forms.TextInput(attrs={'class':'form-control','placeholder':'RIF'}),
             'numero':forms.NumberInput(attrs={'class':'form-control','placeholder':'Numero'}),
-            'direccion':forms.Textarea(attrs={'class':'form-control','placeholder':'Direccion','rows':'1'}),
+            'direccion':forms.Textarea(attrs={'class':'form-control','placeholder':'Direccion','rows':'1','max-height':'50px'}),
            
         }        
