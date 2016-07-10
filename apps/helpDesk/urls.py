@@ -10,6 +10,7 @@ from apps.helpDesk.views import (
         trabajosFinish,
         msv,
         bitacora,
+        cliente_Datos,
 )
 urlpatterns = [
     url(r'^$',index),
@@ -24,5 +25,7 @@ urlpatterns = [
     url(r'^finalizar/(?P<id_trabajo>\d+)/$', trabajosFinish, name='trabajosFinish'), 
     
     url(r'^bitacora/(?P<id_trabajo>\d+)/$', bitacora, name='bitacora'), 
+     
+    url(r'^cliente/j/(?P<rif_cliente>\d+)/$', cliente_Datos, name='buscando'), 
     
 ]

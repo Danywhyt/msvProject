@@ -80,12 +80,27 @@ def trabajos(request):
     #estados = Bitacora.objects.filter(trabajos__status=False)
     estados = Bitacora.objects.filter(id_trabajo__status=False)
     #estados = Trabajo.objects.filter()
-    for i in estados:
-        print (str(i.id_trabajo.id) + '--->BITACORA')
-        print (str(i.id_estado.nombre) + '--->')
+
+
+    if request.method=='POST':
+        #print (request.GET['rif_j'])
+        #print (request.GET[])
+        
+        print(request.POST['nRif'])
+        #redirect ('helpDesk:buscando', id_cliente )
+
+        rif_cliente = request.POST['nRif']
+
+        return redirect ('helpDesk:buscando', rif_cliente)
+
+
+
+        #for i in estados:
+        #print (str(i.id_trabajo.id) + '--->BITACORA')
+        #print (str(i.id_estado.nombre) + '--->')
        
         
-    contexto ={
+    contexto = {
         'trabajos':trabajos,
         'estados':estados,
     }
@@ -166,3 +181,22 @@ def bitacora(request,id_trabajo):
     
     return render(request,'helpDesk/bitacora.html',contexto)
 
+
+  
+
+def cliente_Datos(request,rif_cliente):
+    
+    rif_cliente = 'J' + rif_cliente
+    #print (rif_cliente)
+    cliente = Cliente.objects.filter(rif=rif_cliente)
+    trabajos = Trabajo.objects.filter(id_cliente__rif=rif_cliente)
+    print (cliente)
+    print (trabajos)
+    
+    context ={
+        'cliente':cliente,
+        'trabajos':trabajos
+     }
+
+    return render (request,'helpDesk/clienteTrabajos.html',{'rif_cliente':rif_cliente})
+    
