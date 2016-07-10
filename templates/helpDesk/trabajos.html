@@ -25,7 +25,7 @@
       <th>Fecha-Revisado</th>
       <th>Status</th>
       <th>Cobrado</th>
-      <th>Estado</th>
+      <th>Estado Actual</th>
       <th>Observacion</th>
       <th>Monto</th>
       <th>Insert</th>
@@ -35,15 +35,18 @@
   <tbody>
       {% for trabajo in trabajos %}
       <tr>
+
         <th>
           {{trabajo.id}}
         </th>
+
         <th>
                 {{trabajo.id_cliente.nombre}}
                 
                 {{trabajo.id_cliente.rif}}
           
         </th>
+
         <th>
           {{trabajo.fechaHora}}
         </th>
@@ -51,28 +54,44 @@
         <th>
           {{trabajo.fechaVisita}}
         </th>
+
         <th>
-          {{trabajo.status}}
+          {% if not trabajo.status %}
+          
+          <p class="glyphicon glyphicon-refresh"></p>
+          {% else  %}
+          <p class="glyphicon glyphicon-ok" ></p>
+          {% endif %}
         </th>
+        
         <th>
           {{trabajo.cobrado}}
         </th>
 
         <th>
-          {%if trabajo.id_estado != null%}
+          {% if trabajo.id_estado %}
             {{trabajo.id_estado}}
-          {%endif%}
+          {% endif %}
+
+
+
+
         </th>
+
+
 
         <th>
           {{trabajo.observacion}}
         </th>
+
         <th>
           <p>Monto</p>
         </th>
+
         <th>
-          <a href="{% url 'helpDesk:trabajosEdit' trabajo.id %}" class='btn btn-primary'>Cambiar</a>
+          <a href="{% url 'helpDesk:bitacora' trabajo.id %}" class='btn btn-primary'>Cambiar</a>
         </th>
+
         <th>
           <a href="{% url 'helpDesk:trabajosFinish' trabajo.id %}" class='btn btn-primary'>Finalizar</a>
         </th>

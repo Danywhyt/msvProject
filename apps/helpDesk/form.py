@@ -118,9 +118,9 @@ class BitacoraForm(forms.ModelForm):
 
         widgets={
             
-        'comentario':forms.Textarea(attrs={'class':'form-control','placeholder':'Direccion','rows':'1','max-height':'50px'}),
-        'monto': forms.NumberInput(attrs={'class':'form-control','placeholder':'Numero'}),
-        'id_trabajador':forms.Select(attrs={'class':'form-control'}),
+        'comentario':forms.Textarea(attrs={'class':'form-control','placeholder':'Cometario','rows':'1'}),
+        'monto': forms.NumberInput(attrs={'class':'form-control','placeholder':'Monto'}),
+        'id_trabajador':forms.SelectMultiple(attrs={'class':'form-control'}),
         'id_trabajo':forms.Select(attrs={'class':'form-control'}),
         'id_estado':forms.Select(attrs={'class':'form-control'}),
         }

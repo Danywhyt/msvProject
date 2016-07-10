@@ -73,13 +73,27 @@ def trabajosCrear(request):
         form = TrabajosForm()
     return render(request,'helpDesk/TrabajosForm.html',{'form':form})
 
+
+
 def trabajos(request):
     trabajos = Trabajo.objects.filter(status=False)
-    
+    #estados = Bitacora.objects.filter(trabajos__status=False)
+    estados = Bitacora.objects.filter(id_trabajo__status=False)
+    #estados = Trabajo.objects.filter()
+    for i in estados:
+        print (str(i.id_trabajo.id) + '--->BITACORA')
+        print (str(i.id_estado.nombre) + '--->')
+       
+        
     contexto ={
-        'trabajos':trabajos
+        'trabajos':trabajos,
+        'estados':estados,
     }
     return render(request,'helpDesk/trabajos.html',contexto)
+
+
+
+
 
 def trabajosEdit(request,id_trabajo):
     trabajo = Trabajo.objects.get(id=id_trabajo)
@@ -121,16 +135,27 @@ def msv(request):
 
 def bitacora(request,id_trabajo):
     
-    cliente = Trabajo.objects.filter(pk=4)
+    cliente = Trabajo.objects.get(id=id_trabajo)
     
     trabajo = Bitacora.objects.filter(id_trabajo=id_trabajo)
 
+    estado = Trabajo.objects.filter(id=id_trabajo)
+    
+    #print(estado)
     if request.method == 'POST':
         form = BitacoraForm(request.POST)
+        #print (request.POST['id_trabajador'])
+        print(request.POST['id_estado'])
+        #print (cliente)
         if form.is_valid():
+            post = form.save(commit=False)
+            post.id_trabajo = cliente
             form.save()
-        else:
-            return redirect('helpDesk:bitacora')
+
+            estado.update(id_estado=request.POST['id_estado'])
+
+        
+            return redirect('helpDesk:bitacora',id_trabajo)
     else:
         form = BitacoraForm()
     contexto ={
@@ -140,3 +165,4 @@ def bitacora(request,id_trabajo):
     }
     
     return render(request,'helpDesk/bitacora.html',contexto)
+

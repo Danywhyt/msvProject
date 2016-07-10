@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-    Trabajos
+    Bitacora
 {% endblock title %}
 
 
@@ -13,41 +13,86 @@
 
 
 {% block content %}
-<div class="well well-lg">
-    <h1>
-      {% for i in cliente%}
-        {{i.nombre}}
-      {% endfor %}
-      
-      <p>-----</p>
-      {{trabajo}}
-      </h1>
+<div class="panel panel-default">
+  
+  
+  <div class="panel-body">
+  <table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Id Trabajo</th>
+      <th>Nombre</th>
+      <th>RIF</th>
+      <th>Direccion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="info">
+  <td>
+    {{cliente.id}}
+    
+    </td>
+    <td>
+    {{cliente.id_cliente.nombre}}
+    
+    </td>
+    <td>
+    {{cliente.id_cliente.rif}}
+    
+    </td>
+    <td>
+    {{cliente.id_cliente.direccion}}
+    
+    </td>
+   <!--
+          <td>{{clientes.id}}</td>
+          <td>{{clientes.id_cliente.nombre}}</td>
+          <td>{{clientes.id_cliente.rif}}</td>
+          <td>{{clientes.id_cliente.direccion}}</td>
+       
+    
 
-  <form class="form-horizontal" method="POST">
+  -->
+      </tr>
+  </tbody>
+</table> 
+
+
+
+  </div>
+
+
+
+<div class="well well-lg">
+  <form class="form-horizontal" method="POST" >
     {% csrf_token %}
   <fieldset>
     <legend>Clientes</legend>
     <div class="form-group">
       
       <div class="col-lg-2">
-        {{form.nombre}}
+        {{form.comentario}}
       </div>
       <div class="col-lg-2">
-        {{form.rif}}
-      </div>
-      
-      <div class="col-lg-2">
-        {{form.numero}}
+        {{form.monto}}
       </div>
       
       <div class="col-lg-2">
-        {{form.direccion}}
+        {{form.id_trabajador}}
+      </div>
+      <!--
+      <div class="col-lg-2">
+        {{form.id_trabajo}}
+      </div>
+      -->
+      <div class="col-lg-2">
+        {{form.id_estado}}
       </div>
       <div class="col-lg-2">
         <button type="reset" class="btn btn-default">Cancel</button>
       </div>
       <div class="col-lg-2">
-        <input type="submit" class="btn btn-primary" value="Agregar Cliente"></input>
+        <input type="submit" class="btn btn-primary" value="Agregar Suceso"></input>
       </div>
       
     </div>
@@ -61,26 +106,30 @@
      <table class="table table-striped table-hover ">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>RIF</th>
-      <th>Clave</th>
+      <th>Fecha Revision</th>
+      <th>Comentario</th>
+      <th>Monto</th>
+      <th>Trabajador</th>
+      <th>Estado</th>
     </tr>
   </thead>
   <tbody>
-    {% if clientes %}
-      {% for cliente in clientes %}
+    {% if trabajo %}
+      {% for datosTrabajo in trabajo %}
 
         <tr>
-          <th>{{cliente.id}}</th>
+          <th>{{datosTrabajo.fecha_estado}}</th>
         
-          <th>{{cliente.nombre}}</th>
+          <th>{{datosTrabajo.comentario}}</th>
         
-          <th>{{cliente.rif}}</th>
-        
-          <th>{{cliente.numero}}</th>
+          <th>{{datosTrabajo.monto}}</th>
+          {% for i in datosTrabajo.id_trabajador.filter.all %}
+            <th>{{i.nombre}}</th>  
+
+          {% endfor %}
           
-          <th>{{cliente.direccion}}</th>
+          
+          <th>{{datosTrabajo.id_estado}}</th>
         </tr>
 
       {% endfor %}
