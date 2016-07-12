@@ -13,8 +13,9 @@
 
 
 {% block content %}
+
 <div class="well well-lg">
-  <form class="form-horizontal" method="POST">
+  <form class="form-horizontal" method="POST" >
     {% csrf_token %}
   <fieldset>
     <legend>Clientes</legend>
@@ -35,10 +36,10 @@
         {{form.direccion}}
       </div>
       <div class="col-lg-2">
-        <button type="reset" class="btn btn-default">Cancel</button>
+        <button type="reset" class="btn btn-default">1Cancel</button>
       </div>
       <div class="col-lg-2">
-        <input type="submit" class="btn btn-primary" value="Agregar Cliente"></input>
+        <input type="submit" class="btn btn-primary" value="Agregar Cliente" name="cliente-form"></input>
       </div>
       
     </div>
@@ -46,6 +47,7 @@
 </form>
 </div>
          
+
    
 
 <div class="well">

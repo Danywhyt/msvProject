@@ -31,17 +31,16 @@
           </ul>
         </li>
       </ul>
-      <form class="navbar-form navbar-left" role="search" method="POST">
-        
+      <form class="navbar-form navbar-left" role="search" method="POST" >
         {% csrf_token %}
         <div class="form-group">
-          <select name="rif_j" id="rif_j" class="form-control">
+          <select name="rif_j" id="rif_j" class="form-control" >
             <option value="v">V</option>
             <option value="j" selected>J</option>
           </select>
-          <input type="text" class="form-control" placeholder="Buscar por RIF" name="nRif">
+          <input type="text" class="form-control" placeholder="Buscar por RIF" name="buscar-rif">
         </div>
-        <button type="submit" class="btn btn-default">Buscar</button>
+        <button type="submit" class="btn btn-default" name="nRif">Buscar</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Salir</a></li>

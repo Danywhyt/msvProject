@@ -11,7 +11,7 @@ from apps.helpDesk.models import Trabajo,Trabajador,Estados,Cliente,Bitacora
 def index(request):
     return render(request,'helpDesk/login.html')
 
-def  trabajadores(request):
+def trabajadores(request):
     form = TrabajadorForm
 
     if request.method == 'POST':
@@ -43,19 +43,46 @@ def estados(request):
         'estados':estados,
     }
     return render(request,'helpDesk/status.html',contexto)
+
+
+
     
 def clientes(request):
+    
     if request.method=='POST':
-        form = ClienteForm(request.POST)
-        if form.is_valid():
-            form.save()
-        return redirect('helpDesk:cliente')
+        if "nRif" in request.POST:
+            print (request.POST)
+            rif_cliente1 = request.POST['buscar-rif']
+            rif_cliente = 'J' + rif_cliente1
+
+            print (rif_cliente)
+            cliente = Cliente.objects.get(rif=rif_cliente)
+            trabajos = Trabajo.objects.filter(id_cliente__rif=rif_cliente)
+            #print (cliente)
+            #print (trabajos)
+            
+            context ={
+                'cliente':cliente,
+                'trabajos':trabajos
+            }
+            return redirect ('helpDesk:buscando', rif_cliente1)
+            #return render (request,'helpDesk/clienteTrabajos.html',{'rif_cliente':rif_cliente})
+            
+                
+        if 'cliente-form' in request.POST:
+                
+            
+            form = ClienteForm(request.POST)
+            if form.is_valid():
+                form.save()
+            return redirect('helpDesk:cliente')
     else:
         form = ClienteForm()
     clientes = Cliente.objects.all()
     contexto = {
         'form':form,
         'clientes':clientes,
+        
     }
     return render(request,'helpDesk/cliente.html',contexto)
 
@@ -188,10 +215,10 @@ def cliente_Datos(request,rif_cliente):
     
     rif_cliente = 'J' + rif_cliente
     #print (rif_cliente)
-    cliente = Cliente.objects.filter(rif=rif_cliente)
+    cliente = Cliente.objects.get(rif=rif_cliente)
     trabajos = Trabajo.objects.filter(id_cliente__rif=rif_cliente)
-    print (cliente)
-    print (trabajos)
+    #print (cliente)
+    #print (trabajos)
     
     context ={
         'cliente':cliente,
