@@ -46,7 +46,7 @@ def estados(request):
 
 
 
-    
+
 def clientes(request):
     
     if request.method=='POST':
@@ -73,6 +73,7 @@ def clientes(request):
                 
             
             form = ClienteForm(request.POST)
+
             if form.is_valid():
                 form.save()
             return redirect('helpDesk:cliente')
@@ -116,7 +117,7 @@ def trabajos(request):
         print(request.POST['nRif'])
         #redirect ('helpDesk:buscando', id_cliente )
 
-        rif_cliente = request.POST['nRif']
+        rif_cliente =  request.POST['buscar-rif']
 
         return redirect ('helpDesk:buscando', rif_cliente)
 
@@ -209,10 +210,10 @@ def bitacora(request,id_trabajo):
     return render(request,'helpDesk/bitacora.html',contexto)
 
 
-  
+
 
 def cliente_Datos(request,rif_cliente):
-    
+
     rif_cliente = 'J' + rif_cliente
     #print (rif_cliente)
     cliente = Cliente.objects.get(rif=rif_cliente)

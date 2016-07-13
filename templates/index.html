@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+
+
+{% block title %}
+    Iniciar Sesion
+{% endblock title %}
+
+{% block header %}
+    
+{% endblock header %}
+
+{% block content %}
+
+
+
+     <section class="login" >
+          
+       <fieldset>
+           <legend>MSV</legend>
+        <form action="" method="post">
+            {% csrf_token %}
+           
+            <div class="datos">
+                
+                <input type="text" id="inputUser" placeholder="Usuario" name="username">
+
+                <input type="password" id="inputPass" placeholder="Contraseña" name="password">
+            </div>
+            
+            <div class="datos botones">
+                <a href="">Recurperar Contraseña</a>
+                <input type="submit" value="Ingresar    " class ="btn btn-primary">
+                <input type="reset" value="Cancel">
+            </div>
+        </form>
+        </fieldset>
+        
+ 
+{% endblock content %}
+
+
+{% block footer %}
+    
+{% endblock footer %}

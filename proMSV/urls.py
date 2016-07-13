@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-
+from django.contrib.auth.views import login
 urlpatterns = [
     url(r'^admin/', admin.site.urls), 
-    url(r'^login/',include('apps.helpDesk.urls',namespace='helpDesk')), 
+    url(r'^helpDesk/',include('apps.helpDesk.urls',namespace='helpDesk')),
+    url(r'^usuario/',include('apps.usuario.urls',namespace='usuario')),
+    url(r'^$',login,{'template_name':'index.html'},name='loginUser'),
+
 ]
  

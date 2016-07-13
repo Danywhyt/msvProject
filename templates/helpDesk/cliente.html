@@ -25,7 +25,15 @@
         {{form.nombre}}
       </div>
       <div class="col-lg-2">
-        {{form.rif}}
+
+          <div class="form-group">
+          <select name="rif_j" id="rif_j" class="form-control" >
+            <option value="v">V</option>
+            <option value="j" selected>J</option>
+          </select>
+          {{form.rif}}
+        </div>
+
       </div>
       
       <div class="col-lg-2">
@@ -36,12 +44,12 @@
         {{form.direccion}}
       </div>
       <div class="col-lg-2">
-        <button type="reset" class="btn btn-default">1Cancel</button>
+        <button type="reset" class="btn btn-default">Cancel</button>
       </div>
       <div class="col-lg-2">
         <input type="submit" class="btn btn-primary" value="Agregar Cliente" name="cliente-form"></input>
       </div>
-      
+
     </div>
   </fieldset>
 </form>
@@ -57,8 +65,8 @@
       <th>ID</th>
       <th>Nombre</th>
       <th>RIF</th>
-      <th>Numero</th>
-      <th><Direccion></Direccion></th>
+      <th>Número</th>
+      <th>Dirección</th>
     </tr>
   </thead>
   <tbody>

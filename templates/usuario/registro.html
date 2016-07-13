@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+ 
+{% block title %}
+    Registro de Usuario
+{% endblock %}
+
+{% block header %}
+    {% include 'base/header.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="well well-sm">
+
+    <form action="" class="form-horizontal" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Guardar">
+    </form>
+</div>
+{% endblock %}

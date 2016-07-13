@@ -64,7 +64,12 @@
         </th>
         
         <th>
-          {{trabajo.cobrado}}
+            {% if not trabajo.cobrado %}
+                <p>NO</p>
+             {% else %}
+                {{trabajo.cobrado}}
+            {% endif %}
+
         </th>
 
         <th>
