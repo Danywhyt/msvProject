@@ -13,38 +13,35 @@
 
 
 {% block content %}
-<div class="well well-lg">
-  <form class="form-horizontal" method="POST">
-    {% csrf_token %}
-  <fieldset>
-    <legend>Usuarios</legend>
-    <div class="form-group">
-      
-      <div class="col-lg-2">
-        {{form.nombre}}
-      </div>
-      <div class="col-lg-2">
-        {{form.clave}}
-      </div>
-      <div class="col-lg-2">
-        <input type="password" class="form-control" placeholder="Confirmar Clave">
-      </div>
-      
-      <div class="col-lg-2">
-        {{form.numero}}
-      </div>
-      <div class="col-lg-2">
-        <button type="reset" class="btn btn-default">Cancel</button>
-      </div>
-      <div class="col-lg-2">
-        <input type="submit" class="btn btn-primary" value="Agregar Usuario ">
-      </div>
-      
-    </div>
-  </fieldset>
-</form>
+
+
+        <div class="panel panel-primary col-sm-4 col-sm-offset-4">
+            <div class="panel-heading">
+                <h3 class="panel-title">Usuario</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="POST">
+                    {% csrf_token %}
+                    <fieldset>
+                        <legend class=" col-sm-4-">Usuario</legend>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Guardar" class="btn btn-primary">
+                    </fieldset>
+                </form>
+
+
+            </div>
+        <a href="{% url 'usuario:registrar' %}" class="btn btn-danger">Agregar Usuario</a>
+        </div>
+
+<div class="well col-sm-12">
+<p>Por aca</p>
+    {% for foo in usuario %}
+        {{ foo.id }}
+    {% endfor %}
+
 </div>
-         
    
 
 <div class="well">
@@ -53,20 +50,25 @@
     <tr>
       <th>ID</th>
       <th>Nombre</th>
-      <th>Numero</th>
+      <th>Clave</th>
+      <th>Usuario</th>
       <th>Clave</th>
     </tr>
   </thead>
   <tbody>
-    {% if trabajadores %}
-      {% for trabajador in trabajadores %}
+    {% if usuario %}
+      {% for trabajador in  usuario %}
 
         <tr>
           <th>{{trabajador.id}}</th>
         
-          <th>{{trabajador.nombre}}</th>
+          <th>{{trabajador.username}}</th>
         
-          <th>{{trabajador.clave}}</th>
+          <th>
+              {% if trabajador.password %}
+              <p>********</p>
+              {% endif %}
+          </th>
         
           <th>{{trabajador.numero}}</th>
         </tr>

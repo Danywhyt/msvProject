@@ -105,7 +105,9 @@
 
     {% else %}
 
-    <h1> No hay Registro de Trabajos</h1>
+        <h1> No hay Registro de Trabajos</h1>
+        <a href="{% url 'helpDesk:trabajosCrear'%}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Agregar Trabajo </a>
+
     {% endif %}
   </tbody>
 </table> 

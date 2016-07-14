@@ -1,4 +1,5 @@
 from django.conf.urls import url, include
+from django.contrib.auth.decorators import login_required
 from apps.helpDesk.views import (
         index,
         trabajadores,
@@ -13,10 +14,9 @@ from apps.helpDesk.views import (
         cliente_Datos,
 )
 urlpatterns = [
-    url(r'^$',index),
-    url(r'^msv$',msv,name='msv'), 
+    url(r'^$',login_required(msv),name='msv'),
     url(r'^user$',trabajadores,name='usuarios'),
-    url(r'^estados$',estados,name='status'), 
+    url(r'^estados$',login_required(estados),name='status'),
     url(r'^clientes$',clientes,name='cliente'), 
     url(r'^trabajos$', trabajos, name='trabajos'), 
     url(r'^nuevo$', trabajosCrear, name='trabajosCrear'),

@@ -92,7 +92,7 @@
         <button type="reset" class="btn btn-default">Cancel</button>
       </div>
       <div class="col-lg-2">
-        <input type="submit" class="btn btn-primary" value="Agregar Suceso"></input>
+        <input type="submit" class="btn btn-primary" value="Agregar Suceso">
       </div>
       
     </div>
@@ -123,7 +123,7 @@
           <th>{{datosTrabajo.comentario}}</th>
         
           <th>{{datosTrabajo.monto}}</th>
-          {% for i in datosTrabajo.id_trabajador.filter.all %}
+          {% for i in datosTrabajo.id.filter.all %}
             <th>{{i.nombre}}</th>  
 
           {% endfor %}
@@ -137,4 +137,7 @@
   </tbody>
 </table> 
 </div>
+
 {% endblock content %}
+
+</div>

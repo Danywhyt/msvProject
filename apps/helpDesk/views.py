@@ -1,19 +1,22 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+# from django.http import HttpResponse
 
-from django.contrib.auth.decorators import login_required
-from apps.helpDesk.form import TrabajosForm,TrabajadorForm, EstadoForm, ClienteForm,BitacoraForm
+from apps.helpDesk.form import TrabajosForm, TrabajadorForm, EstadoForm, ClienteForm, BitacoraForm
 
-from apps.helpDesk.models import Trabajo,Trabajador,Estados,Cliente,Bitacora
+from apps.helpDesk.models import Trabajo, Trabajador, Estados, Cliente, Bitacora
+from django.contrib.auth.models import User
 
 # Create your views here.
 
+
 def index(request):
-    return render(request,'helpDesk/login.html')
+        return render(request, 'helpDesk/login.html')
+
 
 def trabajadores(request):
-    form = TrabajadorForm
 
+    form = TrabajadorForm
+    usuario = User.objects.all()
     if request.method == 'POST':
         form = TrabajadorForm(request.POST or None)
         if form.is_valid():
@@ -22,9 +25,10 @@ def trabajadores(request):
     else:
         form = TrabajadorForm
     trabajadores = Trabajador.objects.all()
-    contexto ={
-        'trabajadores':trabajadores,
-        'form':form
+    contexto = {
+        'trabajadores': trabajadores,
+        'form': form,
+        'usuario': usuario,
     }
     return render(request,'helpDesk/trabajador.html',contexto)
 
@@ -43,9 +47,6 @@ def estados(request):
         'estados':estados,
     }
     return render(request,'helpDesk/status.html',contexto)
-
-
-
 
 def clientes(request):
     
@@ -165,24 +166,23 @@ def trabajosFinish(request,id_trabajo):
     
     return redirect('helpDesk:trabajos')
 
+
 def msv(request):
     trabajos = Trabajo.objects.all()
     
-    contexto ={
-        'trabajos':trabajos
+    contexto = {
+        'trabajos': trabajos
     }
     return render(request,'helpDesk/trabajos.html',contexto)
 
 
-
-
 def bitacora(request,id_trabajo):
     
-    cliente = Trabajo.objects.get(id=id_trabajo)
+    cliente = Trabajo.objects.get(id= id_trabajo)
     
-    trabajo = Bitacora.objects.filter(id_trabajo=id_trabajo)
+    trabajo = Bitacora.objects.filter(id_trabajo= id_trabajo)
 
-    estado = Trabajo.objects.filter(id=id_trabajo)
+    estado = Trabajo.objects.filter(id= id_trabajo)
     
     #print(estado)
     if request.method == 'POST':
@@ -208,8 +208,6 @@ def bitacora(request,id_trabajo):
     }
     
     return render(request,'helpDesk/bitacora.html',contexto)
-
-
 
 
 def cliente_Datos(request,rif_cliente):

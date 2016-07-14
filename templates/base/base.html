@@ -15,14 +15,17 @@
     <title>{% block title %}Document{% endblock title %}</title>
 </head>
 <body>
+
+
     {% block header %}
         <h3>Este es el bloque del header</h3>    
     {% endblock header %}
-
+    <div class="well well-lg">
     {% block content %}
         <h2>Este el contenido</h2>
     {% endblock content %}
 
+    </div>
     {% block footer %}
         <h4>Este es el footer</h4>
     {% endblock footer %}
@@ -31,5 +34,7 @@
         <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
         <script src="{% static 'js/bootstrap.min.js'%}"></script>
     {% endblock extrajs %}
+
+
 </body>
 </html>
