@@ -13,6 +13,12 @@
 
 {% block content %}
 
+
+  
+    {% for row in estados %}
+      <h4>{{row.id_trabajo}}</h4>    
+    {% endfor %}
+  
     {% if trabajos %}
     <a href="{% url 'helpDesk:trabajosCrear'%}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Agregar Trabajo </a>
     <table class="table table-striped table-hover ">
@@ -73,6 +79,8 @@
         </th>
 
         <th>
+
+
           {% if trabajo.id_estado %}
             {{trabajo.id_estado}}
           {% endif %}
@@ -89,7 +97,13 @@
         </th>
 
         <th>
-          <p>Monto</p>
+          {% for i in estados %}
+            
+            {% if i.id_trabajo.id == trabajo.id %}
+              {{i.monto}}
+              {{break}}
+            {% endif %}
+          {% endfor %}
         </th>
 
         <th>

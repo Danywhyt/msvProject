@@ -13,7 +13,6 @@ class  TrabajosForm(forms.ModelForm):
             'observacion',
             'cobrado',
             'status',
-            'id_trabajador',
 
         ]
 
@@ -24,7 +23,6 @@ class  TrabajosForm(forms.ModelForm):
             'status':'Estado',
             'observacion':'Observacion',
             'cobrado':'Cobrado',
-            'id_trabajador':'Trabajador',
         }
         widgets = {
             
@@ -33,7 +31,6 @@ class  TrabajosForm(forms.ModelForm):
             'status':forms.CheckboxInput(attrs={'class':'form-control','checked':'true'}),
             'observacion':forms.Textarea(attrs={'class':'form-control','rows':'5'}),
             'cobrado':forms.CheckboxInput(attrs={'class':'form-control'}),
-            'id_trabajador':forms.Select(attrs={'class':'form-control'}),
         }
 
 

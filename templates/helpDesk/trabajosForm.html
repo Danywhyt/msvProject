@@ -17,36 +17,30 @@
     {% csrf_token %}
   <fieldset>
     <legend>Llamadas</legend>
-    <div class="form-group">
-      <label for="id_id_cliente" class="col-lg-2 control-label">Cliente</label>
-      <div class="col-lg-10">
+    <div class="form-group <col-lg-12></col-lg-12>">
+      <label for="id_id_cliente" class="col-lg-2 control-label col-lg-offset-3">Cliente</label>
+      <div class="col-lg-4 ">
         
         {{form.id_cliente}}
         
       </div>
     </div>
     <div class="form-group">
-      <label for="id_fechaVisita" class="col-lg-2 control-label">Fecha Visita</label>
-      <div class="col-lg-10">
+      <label for="id_fechaVisita" class="col-lg-2 control-label col-lg-offset-3">Fecha Visita</label>
+      <div class="col-lg-4">
         {{form.fechaVisita}}
       </div>
     </div>
     <div class="form-group">
-      <label for="id_observacion" class="col-lg-2 control-label">Observacion</label>
-      <div class="col-lg-10">
+      <label for="id_observacion" class="col-lg-2 control-label col-lg-offset-3">Observacion</label>
+      <div class="col-lg-4">
         {{form.observacion}}
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="id_id_trabajador" class="col-lg-2 control-label">Trabajador</label>
-      <div class="col-lg-10">
-        {{form.id_trabajador}}
-      </div>
-    </div>
 
     <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
+      <div class="col-lg-10 col-lg-offset-6">
         <button type="submit" class="btn btn-primary">Registrar</button>
         <button type="reset" class="btn btn-default">Cancel</button>
       </div>
@@ -55,8 +49,10 @@
 </form>
 </div>
 
-<script src="js/jscrip.js"></script>
+<script src=""></script>
 {% endblock content %}
+
+
 
 {% block footer %}
     
