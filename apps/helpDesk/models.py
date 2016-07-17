@@ -3,6 +3,7 @@ from  django.contrib.auth.models import User
 import datetime
 # Create your models here.
 
+
 class Trabajador(models.Model):
     nombre = models.CharField(max_length=150)
     clave = models.CharField(max_length= 30)
@@ -17,7 +18,12 @@ class Cliente(models.Model):
     numero = models.IntegerField()
     direccion = models.TextField()
     def __str__ (self):
-        return '%s %s %s' % (self.rif,self.nombre,self.direccion)
+        fiel= [
+            self.rif,
+            self.nombre,
+        ]
+        return 'Cliente: {:_<11.11}{:_<18.16}{:<22.20}'.format(self.rif, self.nombre, self.direccion)
+
 
 
 class Estados(models.Model):

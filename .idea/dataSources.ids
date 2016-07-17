@@ -118,13 +118,13 @@
     <table name="helpDesk_bitacora_id_trabajador" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="bitacora_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="trabajador_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="user_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <primary-key columns="id"/>
-      <foreign-key name="#FAKE_helpDesk_bitacora_id_trabajador_1" columns="trabajador_id" ref-table="helpDesk_trabajador" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_helpDesk_bitacora_id_trabajador_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_helpDesk_bitacora_id_trabajador_2" columns="bitacora_id" ref-table="helpDesk_bitacora" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="helpDesk_bitacora_id_trabajador_12b1cd18" unique="true" columns="trabajador_id"/>
+      <index name="helpDesk_bitacora_id_trabajador_e8701ad4" unique="true" columns="user_id"/>
       <index name="helpDesk_bitacora_id_trabajador_f51b8dfb" unique="true" columns="bitacora_id"/>
-      <index name="helpDesk_bitacora_id_trabajador_bitacora_id_ba3e333a_uniq" unique="true" columns="bitacora_id,trabajador_id"/>
+      <index name="helpDesk_bitacora_id_trabajador_bitacora_id_7df99b38_uniq" unique="true" columns="bitacora_id,user_id"/>
     </table>
     <table name="helpDesk_cliente" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
@@ -157,7 +157,7 @@
       <column name="id_estado_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
       <column name="id_trabajador_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
       <primary-key columns="id"/>
-      <foreign-key name="#FAKE_helpDesk_trabajo_1" columns="id_trabajador_id" ref-table="helpDesk_trabajador" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_helpDesk_trabajo_1" columns="id_trabajador_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_helpDesk_trabajo_2" columns="id_estado_id" ref-table="helpDesk_estados" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_helpDesk_trabajo_3" columns="id_cliente_id" ref-table="helpDesk_cliente" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <index name="helpDesk_trabajo_e86587dc" unique="true" columns="id_trabajador_id"/>
@@ -167,6 +167,14 @@
     <table name="sqlite_sequence" schema="" catalog="" type="TABLE">
       <column name="name" sqlType="" precision="0" scale="-1" nullable="true" jdbcType="12"/>
       <column name="seq" sqlType="" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+    </table>
+    <table name="usuario_userprofile" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="nombre" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="numero" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="user_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_usuario_userprofile_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
     </table>
   </data-source>
 </component>

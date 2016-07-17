@@ -1,7 +1,7 @@
 
-from django.conf.urls import url,include
-from apps.usuario.views import RegistroUsuario
+from django.conf.urls import url
+from apps.usuario.views import reg_view
+
 urlpatterns = [
-    url(r'^registrar', RegistroUsuario.as_view() , name='registrar'),
+    url(r'^registrar', reg_view, name='registrar'),
 ]
- 
