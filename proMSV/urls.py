@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from django.contrib.auth.views import login,logout_then_login
+from apps.helpDesk.views import ClienteAutoComplete
 from  django.contrib.auth.decorators import login_required
 urlpatterns = [
     url(r'^admin/', admin.site.urls), 
@@ -23,6 +24,8 @@ urlpatterns = [
     url(r'^usuario/',include('apps.usuario.urls',namespace='usuario')),
     url(r'^accounts/login/',login,{'template_name':'usuario/index.html'},name='loginUser'),
     url(r'^logout/',logout_then_login, name='logout'),
+
+    url(r'^clienteComplete/$', ClienteAutoComplete.as_view(), name='clienteComplete'),
     
 
 ]

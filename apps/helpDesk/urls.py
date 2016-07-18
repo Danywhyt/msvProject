@@ -23,9 +23,8 @@ urlpatterns = [
     url(r'^edit/(?P<id_trabajo>\d+)/$', trabajosEdit, name='trabajosEdit'), 
     url(r'^finalizar/(?P<id_trabajo>\d+)/$', trabajosFinish, name='trabajosFinish'),
     
-    url(r'^bitacora/(?P<id_trabajo>\d+)/$', bitacora, name='bitacora'), 
-     
-    url(r'^cliente/j/(?P<rif_cliente>\d+)/$', cliente_Datos, name='buscando'), 
-    
+    url(r'^bitacora/(?P<id_trabajo>\d+)/$', bitacora, name='bitacora'),
+
+    url(r'^cliente/j/(?P<rif_cliente>\d+)/$', cliente_Datos, name='buscando'),
 ]
 

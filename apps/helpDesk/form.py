@@ -1,37 +1,38 @@
-from django import  forms
+from dal import autocomplete
+
+from django import forms
+
 from apps.helpDesk.models import Trabajo,Trabajador,Estados,Cliente,Bitacora
 
 
-class  TrabajosForm(forms.ModelForm):
-    
+class TrabajosForm(forms.ModelForm):
+    #id_cliente = forms.ModelChoiceField(        queryset=Cliente.objects.all(),        widget=autocomplete.ModelSelect2(url='clienteComplete')    )
+
     class Meta:
         model = Trabajo
 
-        fields=[
+
+        fields = [
             'id_cliente',
             'fechaVisita',
             'observacion',
-            'cobrado',
-            'status',
-
         ]
 
         labels = {
             
-            'id_cliente':'Cliente',
-            'fechaVisita':'Fecha Visita',
-            'status':'Estado',
-            'observacion':'Observacion',
-            'cobrado':'Cobrado',
+            'id_cliente': 'Cliente',
+            'fechaVisita': 'Fecha Visita',
+            'observacion': 'Observacion',
         }
         widgets = {
-            
-            'id_cliente':forms.Select(attrs={'class':'form-control',}),
-            'fechaVisita':forms.DateInput(attrs={'class':'form-control','type':'date'}) ,
-            'status':forms.CheckboxInput(attrs={'class':'form-control','checked':'true'}),
-            'observacion':forms.Textarea(attrs={'class':'form-control','rows':'5'}),
-            'cobrado':forms.CheckboxInput(attrs={'class':'form-control'}),
+            # 'id_cliente': forms.TextInput(attrs={'class': 'form-control'}),
+            'id_cliente': autocomplete.ModelSelect2(url='clienteComplete'),# forms.Select(attrs={'class':'form-control',}),
+
+            'fechaVisita': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'observacion': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
         }
+
+
 
 
 class TrabajadorForm(forms.ModelForm):
@@ -45,14 +46,14 @@ class TrabajadorForm(forms.ModelForm):
         ]
 
         labels = {
-            'nombre':'Nombre',
-            'clave':'Clave',
-            'numero':'Numero',
+            'nombre': 'Nombre',
+            'clave': 'Clave',
+            'numero': 'Numero',
         }
-        widgets={
-            'nombre':forms.TextInput(attrs={'class':'form-control','placeholder':'Nombre'}),
-            'clave':forms.TextInput(attrs={'class':'form-control','type':'password','placeholder':'Clave'}),
-            'numero':forms.NumberInput(attrs={'class':'form-control','placeholder':'Numero'}),
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'}),
+            'clave': forms.TextInput(attrs={'class': 'form-control', 'type':'password', 'placeholder': 'Clave'}),
+            'numero': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Numero'}),
         }
 
 class EstadoForm(forms.ModelForm):

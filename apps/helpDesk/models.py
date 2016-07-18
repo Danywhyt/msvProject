@@ -6,10 +6,11 @@ import datetime
 
 class Trabajador(models.Model):
     nombre = models.CharField(max_length=150)
-    clave = models.CharField(max_length= 30)
+    clave = models.CharField(max_length=30)
     numero = models.IntegerField()
+
     def __str__(self):
-        return '%s %s %s' % (self.id,self.nombre,self.clave)
+        return '%s %s %s' % (self.id, self.nombre, self.clave)
         
         
 class Cliente(models.Model):
@@ -17,39 +18,46 @@ class Cliente(models.Model):
     rif = models.CharField(max_length=100)
     numero = models.IntegerField()
     direccion = models.TextField()
-    def __str__ (self):
-        fiel= [
+
+    def __str__(self):
+        fiel = [
             self.rif,
             self.nombre,
         ]
-        return 'Cliente: {:_<11.11}{:_<18.16}{:<22.20}'.format(self.rif, self.nombre, self.direccion)
 
+        return '%s %s' % (self.rif, self.nombre)
+        # return '%s' % self.rif
 
 
 class Estados(models.Model):
-    nombre = models.CharField(max_length= 100)
+
+    nombre = models.CharField(max_length=100)
+
     def __str__(self):
-        return '%s' %(self.nombre)
+        return '%s' % self.nombre
 
  
 class Trabajo(models.Model):
     fechaHora = models.DateTimeField(auto_now_add=True)
-    fechaVisita = models.DateField(null=True,blank=True)
+    fechaVisita = models.DateField(null=True, blank=True)
     status = models.BooleanField()
     observacion = models.TextField()
     cobrado = models.BooleanField()
-    id_trabajador = models.ForeignKey(User,null=True,blank=True,on_delete=models.CASCADE)
-    id_cliente = models.ForeignKey(Cliente,null=True,blank=True,on_delete=models.CASCADE)
-    id_estado = models.ForeignKey(Estados,null=True,blank=True,on_delete=models.CASCADE,)
+    id_trabajador = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    id_cliente = models.ForeignKey(Cliente, null=True, blank=True, on_delete=models.CASCADE)
+    id_estado = models.ForeignKey(Estados, null=True, blank=True, on_delete=models.CASCADE)
+
     def __str__(self):
-        return '%s %s' % (self.pk,self.id_cliente)
-        
+        return '%s - %s' % (self.id_cliente.rif,self.id_cliente.nombre)
+
+
 class Bitacora(models.Model):
     fecha_estado = models.DateTimeField(auto_now_add=True)
     comentario = models.TextField()
     monto = models.IntegerField()
     id_trabajador = models.ManyToManyField(User)
-    id_trabajo = models.ForeignKey(Trabajo,null=True,blank=True,on_delete=models.CASCADE)
-    id_estado = models.ForeignKey(Estados,null=True,blank=True,on_delete=models.CASCADE)
+    id_trabajo = models.ForeignKey(Trabajo, null=True, blank=True, on_delete=models.CASCADE)
+    id_estado = models.ForeignKey(Estados, null=True, blank=True, on_delete=models.CASCADE)
+
     def __str__(self):
-        return '%s' % (self.comentario)
+        return '%s' % self.comentario
