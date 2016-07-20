@@ -7,7 +7,7 @@
 
 {% block header %}
 
-{% include "base/header.html" %}
+{% include "base/header1.html" %}
 
 {% endblock header %}
 
@@ -25,23 +25,16 @@
                     <fieldset>
                         <legend class=" col-sm-4-">Usuario</legend>
                         {% csrf_token %}
-                        {{ form.as_p }}
+                        {{ form2.as_p }}
                         <input type="submit" value="Guardar" class="btn btn-primary">
                     </fieldset>
                 </form>
 
 
             </div>
-        <a href="{% url 'usuario:registrar' %}" class="btn btn-danger">Agregar Usuario</a>
+        
         </div>
 
-<div class="well col-sm-12">
-<p>Por aca</p>
-    {% for foo in usuario %}
-        {{ foo.id }}
-    {% endfor %}
-
-</div>
    
 
 <div class="well">
@@ -52,7 +45,7 @@
       <th>Nombre</th>
       <th>Clave</th>
       <th>Usuario</th>
-      <th>Clave</th>
+      <th>Numero</th>
     </tr>
   </thead>
   <tbody>
@@ -62,15 +55,18 @@
         <tr>
           <th>{{trabajador.id}}</th>
         
-          <th>{{trabajador.username}}</th>
+          <th>{{trabajador.userprofile.nombre}}</th>
         
           <th>
               {% if trabajador.password %}
               <p>********</p>
               {% endif %}
           </th>
+          <th>
+              {{ trabajador.username}}
+          </th>
         
-          <th>{{trabajador.numero}}</th>
+          <th>{{trabajador.userprofile.numero}}</th>
         </tr>
 
       {% endfor %}

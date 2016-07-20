@@ -7,137 +7,136 @@
 
 {% block header %}
 
-{% include "base/header.html" %}
+{% include "base/header1.html" %}
 
 {% endblock header %}
 
 
 {% block content %}
+
+<div class="container col-xs-12">
 <div class="panel panel-default">
-  
-  
-  <div class="panel-body">
-  <table class="table table-striped table-hover ">
-  <thead>
-    <tr>
-      <th>Id Trabajo</th>
-      <th>Nombre</th>
-      <th>RIF</th>
-      <th>Direccion</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="info">
-  <td>
-    {{cliente.id}}
-    
-    </td>
-    <td>
-    {{cliente.id_cliente.nombre}}
-    
-    </td>
-    <td>
-    {{cliente.id_cliente.rif}}
-    
-    </td>
-    <td>
-    {{cliente.id_cliente.direccion}}
-    
-    </td>
-   <!--
-          <td>{{clientes.id}}</td>
-          <td>{{clientes.id_cliente.nombre}}</td>
-          <td>{{clientes.id_cliente.rif}}</td>
-          <td>{{clientes.id_cliente.direccion}}</td>
-       
-    
 
-  -->
-      </tr>
-  </tbody>
-</table> 
+
+          <div class="panel-body">
+          <table class="table table-striped table-hover ">
+          <thead>
+            <tr>
+              <th>Id-Trabajo</th>
+              <th>Nombre</th>
+              <th>RIF</th>
+              <th>Direccion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="info">
+              <td>
+                {{cliente.id}}
+              
+
+                  </td>
+            <td>
+            {{cliente.id_cliente.nombre}}
+
+            </td>
+            <td>
+            {{cliente.id_cliente.rif}}
+
+            </td>
+            <td>
+            {{cliente.id_cliente.direccion}}
+
+            </td>
+           <!--
+                  <td>{{clientes.id}}</td>
+                  <td>{{clientes.id_cliente.nombre}}</td>
+                  <td>{{clientes.id_cliente.rif}}</td>
+                  <td>{{clientes.id_cliente.direccion}}</td>
 
 
 
-  </div>
+          -->
+              </tr>
+          </tbody>
+        </table>
 
 
 
-<div class="well well-lg">
-  <form class="form-horizontal" method="POST" >
-    {% csrf_token %}
-  <fieldset>
-    <legend>Clientes</legend>
-    <div class="form-group">
-      
-      <div class="col-lg-2">
-        {{form.comentario}}
-      </div>
-      <div class="col-lg-2">
-        {{form.monto}}
-      </div>
-      
-      <div class="col-lg-2">
-        {{form.id_trabajador}}
-      </div>
-      <!--
-      <div class="col-lg-2">
-        {{form.id_trabajo}}
-      </div>
-      -->
-      <div class="col-lg-2">
-        {{form.id_estado}}
-      </div>
-      <div class="col-lg-2">
-        <button type="reset" class="btn btn-default">Cancel</button>
-      </div>
-      <div class="col-lg-2">
-        <input type="submit" class="btn btn-primary" value="Agregar Suceso">
-      </div>
-      
-    </div>
-  </fieldset>
-</form>
+          </div>
+
+
+
+        <div class="well well-lg">
+          <form class="form-horizontal" method="POST" >
+            {% csrf_token %}
+              <fieldset>
+                  <legend>Clientes</legend>
+                  <div class="form-group">
+                      <div class="col-lg-2">
+                          {{form.comentario}}
+                      </div>
+                      <div class="col-lg-2">
+                          {{form.monto}}
+                      </div>
+
+                      <div class="col-lg-2">
+                          {{form.id_estado}}
+                      </div>
+                      <div class="col-lg-2">
+                          <input type="hidden" name="id_trabajador" value="{{ user.id }}"  class="form-control">
+                      </div>
+                      
+                      <div class="col-lg-2">
+                          <input type="submit" class="btn btn-primary" value="Agregar Suceso">
+                      </div>
+                      <div class="col-lg-2">
+                          <a href="{% url 'helpDesk:trabajos' %}" class="btn btn-default col col-sm-6 pull-right"> Cancel</a>
+                      </div>
+                  </div>
+              </fieldset>
+          </form>
+        </div>
+
+
+
+        <div class="well">
+             <table class="table table-striped table-hover ">
+          <thead>
+            <tr>
+              <th>Fecha Revision</th>
+              <th>Comentario</th>
+              <th>Monto</th>
+              <th>Trabajador</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if trabajo %}
+                <h1>{{usuario}}</h1>
+              {% for datosTrabajo in trabajo %}
+
+                <tr>
+                  <th>{{datosTrabajo.fecha_estado}}</th>
+
+                  <th>{{datosTrabajo.comentario}}</th>
+
+                  <th>{{datosTrabajo.monto}}</th>22
+
+
+                    <th> {{ datosTrabajo.id_trabajador.userprofile.nombre}} </th>
+
+
+
+                  <th>{{datosTrabajo.id_estado}}</th>
+                </tr>
+
+              {% endfor %}
+            {% endif %}
+          </tbody>
+        </table>
+        </div>
+
+
 </div>
-         
-   
-
-<div class="well">
-     <table class="table table-striped table-hover ">
-  <thead>
-    <tr>
-      <th>Fecha Revision</th>
-      <th>Comentario</th>
-      <th>Monto</th>
-      <th>Trabajador</th>
-      <th>Estado</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% if trabajo %}
-      {% for datosTrabajo in trabajo %}
-
-        <tr>
-          <th>{{datosTrabajo.fecha_estado}}</th>
-        
-          <th>{{datosTrabajo.comentario}}</th>
-        
-          <th>{{datosTrabajo.monto}}</th>
-          {% for i in datosTrabajo.id.filter.all %}
-            <th>{{i.nombre}}</th>  
-
-          {% endfor %}
-          
-          
-          <th>{{datosTrabajo.id_estado}}</th>
-        </tr>
-
-      {% endfor %}
-    {% endif %}
-  </tbody>
-</table> 
 </div>
-
 {% endblock content %}
-
-</div>

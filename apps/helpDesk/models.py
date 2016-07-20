@@ -1,5 +1,5 @@
 from django.db import models
-from  django.contrib.auth.models import User
+from django.contrib.auth.models import User
 import datetime
 # Create your models here.
 
@@ -55,7 +55,7 @@ class Bitacora(models.Model):
     fecha_estado = models.DateTimeField(auto_now_add=True)
     comentario = models.TextField()
     monto = models.IntegerField()
-    id_trabajador = models.ManyToManyField(User)
+    id_trabajador = models.ForeignKey(User)
     id_trabajo = models.ForeignKey(Trabajo, null=True, blank=True, on_delete=models.CASCADE)
     id_estado = models.ForeignKey(Estados, null=True, blank=True, on_delete=models.CASCADE)
 

@@ -96,26 +96,25 @@ class ClienteForm(forms.ModelForm):
 class BitacoraForm(forms.ModelForm):
     class Meta:
         model = Bitacora
-        fields=[
+        fields = [
             'comentario',
             'monto',
-            'id_trabajador',
+            #'id_trabajador',
             'id_trabajo',
             'id_estado',
         ]
-        labels={
+        labels = {
             'comentario': 'Comentario',
             'monto': 'Monto',
-            'id_trabajador':'Trabajador',
-            'id_trabajo':'Cliente',
-            'id_estado':'Estado',
+            #'id_trabajador': 'Trabajador',
+            'id_trabajo': 'Cliente',
+            'id_estado': 'Estado',
             }
 
-        widgets={
-            
-        'comentario':forms.Textarea(attrs={'class':'form-control','placeholder':'Cometario','rows':'1'}),
-        'monto': forms.NumberInput(attrs={'class':'form-control','placeholder':'Monto'}),
-        'id_trabajador':forms.SelectMultiple(attrs={'class':'form-control'}),
-        'id_trabajo':forms.Select(attrs={'class':'form-control'}),
-        'id_estado':forms.Select(attrs={'class':'form-control'}),
+        widgets = {
+            'comentario': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Cometario', 'rows':'1'}),
+            'monto': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Monto'}),
+            #'id_trabajador': forms.Select(attrs={'class': 'form-control'}),
+            'id_trabajo': forms.Select(attrs={'class': 'form-control'}),
+            'id_estado': forms.Select(attrs={'class': 'form-control'}),
         }

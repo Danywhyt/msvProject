@@ -1,0 +1,124 @@
+{% load staticfiles %}
+
+{% block header %}
+
+<header>
+        <nav class="navbar navbar-default customnavbar">
+             <div class="container">
+                 <div class="navbar-header">
+
+                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+
+                     
+                     <a class="" href="{% url 'helpDesk:msv'%}">
+
+                         <img src="{% static 'img/icon.png' %}" alt="" height="70">
+                     </a>
+                     
+                 </div>
+
+
+
+
+                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                     <ul class="nav navbar-nav navbar-right">
+                         
+
+
+                        <li ><a href="{% url 'helpDesk:trabajos'%}">Trabajos<span class="sr-only">(current)</span></a></li>
+                        <li ><a href="{% url 'helpDesk:cliente'%}">Clientes </a></li>
+                        <li ><a href="{% url 'helpDesk:usuarios'%}">Trabajadores </a></li>
+                         <li class="dropdown">
+                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                              Estados <span class="caret"></span>
+                             </a>
+                             <ul class="dropdown-menu" role="menu">
+                                 <li><a href="#">Repuestos</a></li>
+                                 <li><a href="#">Cableado</a></li>
+                                 <li><a href="#">Impresoras</a></li>
+                                 <li class="divider"></li>
+                                 <li><a href="{% url 'helpDesk:status' %}">Agregar un Estado</a></li>
+                             </ul>
+                         </li>
+
+
+
+                         <li >
+                             <form method="POST" role="search" >
+                                 {% csrf_token %}
+                                 <div class="input-group" id="div-src">
+                                    <select name="rif_j" id="rif_j" class="form-control">
+                                                 <option value="V">V</option>
+                                                 <option value="J" selected >J</option>
+                                    </select>
+
+                                    <!-- insert this line -->
+                                     <span class="input-group-addon" id="span-src" style="width:0px; padding-left:0px; padding-right:0px; border:none;"></span>
+                                     <input type="text" class="form-control" placeholder="Buscar por RIF" name="buscar-rif" id="input-src">
+                                     <span class="input-group-btn" id="btn-src">
+                                         
+                                         <button type="submit" class="btn btn-default" name="nRif"><i class="glyphicon glyphicon-search"></i></button>
+                                         <!-- <button class="btn btn-default" type="button">
+                                             <i class="glyphicon glyphicon-search"></i>
+                                         </button>-->
+                                         <a href="#" class="btn btn-default" id="close-src">
+                                             <i class="glyphicon glyphicon-remove"></i>
+                                         </a>
+                                     </span>
+                                </div>
+
+                              </form>
+
+                             <a href="#" id="search">
+                                 <i class="glyphicon glyphicon-search"></i>
+                             </a>
+                         </li>
+
+
+
+
+                         <li class="dropdown">
+
+
+
+
+                     </ul>
+
+                 </div>
+             </div>
+        </nav>
+        
+        
+        
+        <div class="container">
+            
+            <div class="container col-sm-4 col-xs-12">
+                
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Bienvenido</h3>
+                    </div>
+                    
+                    <div class="panel-body">
+                        <h3>Usuario: {{user.userprofile.nombre}}</h3>
+
+                        <a href="{% url 'logout' %}" class="btn btn-danger btn-xs pull-right"> Salir</a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            
+    </header>
+
+
+
+{% endblock %}
+

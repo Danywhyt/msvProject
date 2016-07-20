@@ -4,8 +4,10 @@ from django.shortcuts import render, redirect
 # from django.http import HttpResponse
 
 from apps.helpDesk.form import TrabajosForm, TrabajadorForm, EstadoForm, ClienteForm, BitacoraForm
-
 from apps.helpDesk.models import Trabajo, Trabajador, Estados, Cliente, Bitacora
+from apps.usuario.models import UserProfile
+from apps.usuario.form import RegUserForm
+
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -31,25 +33,49 @@ def index(request):
 
 @login_required
 def trabajadores(request):
+    
+    form2 = RegUserForm
+    #form = TrabajadorForm
 
-    form = TrabajadorForm
     usuario = User.objects.all()
+        
     if request.method == 'POST':
-        form = TrabajadorForm(request.POST or None)
-        if form.is_valid():
-            form.save()
-            return redirect('helpDesk:usuarios')
-    else:
-        form = TrabajadorForm
+        print('--------------Test REgistro Usuario-----------------')
+        form2 = RegUserForm(request.POST or None)
+        if form2.is_valid():
+            cleaned_data = form2.cleaned_data
+            password = cleaned_data.get('password')
+            username = cleaned_data.get('username')
+            email = cleaned_data.get('email')
+            nombre = cleaned_data.get('nombre')
+            numero = cleaned_data.get('numero')
+            user_model = User.objects.create_user(username=username, password=password)
+            user_model.email = email
+            user_model.save()
+            user_profile = UserProfile()
+            user_profile.user = user_model
+            user_profile.nombre = nombre
+            user_profile.numero = numero
+            user_profile.save()
+            return redirect('helpDesk:trabajos')
+        else:
+            form2 = RegUserForm()
+
+            
+    #     form = TrabajadorForm(request.POST or None)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('helpDesk:usuarios')
+    # else:
+    #     form = TrabajadorForm
 
     trabajadores = Trabajador.objects.all()
     contexto = {
         'trabajadores': trabajadores,
-        'form': form,
+        'form2': form2,
         'usuario': usuario,
     }
     return render(request, 'helpDesk/trabajador.html', contexto)
-
 
 @login_required
 def estados(request):
@@ -137,7 +163,7 @@ def trabajos(request):
     # estados = Bitacora.objects.filter(trabajos__status=False)
     estados = Bitacora.objects.filter(id_trabajo__status=False)
     # estados = Trabajo.objects.filter()
-
+    
     if request.method=='POST':
         # print (request.GET['rif_j'])
         # print (request.GET[])
@@ -211,16 +237,18 @@ def bitacora(request, id_trabajo):
     trabajo = Bitacora.objects.filter(id_trabajo=id_trabajo)
 
     estado = Trabajo.objects.filter(id=id_trabajo)
-    
+
     # print(estado)
     if request.method == 'POST':
         form = BitacoraForm(request.POST)
-        # print (request.POST['id_trabajador'])
-        print(request.POST['id_estado'])
+        print(request.POST)
+        # print(form)
         # print (cliente)
         if form.is_valid():
             post = form.save(commit=False)
             post.id_trabajo = cliente
+            post.id_trabajador = User.objects.get(pk = request.POST['id_trabajador'])
+
             form.save()
 
             estado.update(id_estado=request.POST['id_estado'])
