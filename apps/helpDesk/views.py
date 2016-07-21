@@ -249,9 +249,12 @@ def bitacora(request, id_trabajo):
             post.id_trabajo = cliente
             post.id_trabajador = User.objects.get(pk = request.POST['id_trabajador'])
 
-            form.save()
-
             estado.update(id_estado=request.POST['id_estado'])
+            #print('--------------------------------------------------------------')
+            #print (cliente.observacion)
+            estado.update(observacion=request.POST['comentario'])
+
+            form.save()
 
             return redirect('helpDesk:bitacora', id_trabajo)
     else:
@@ -260,6 +263,7 @@ def bitacora(request, id_trabajo):
         'cliente': cliente,
         'form': form,
         'trabajo': trabajo,
+        'estado':estado,
     }
     
     return render(request, 'helpDesk/bitacora.html', contexto)
@@ -277,7 +281,7 @@ def cliente_Datos(request,rif_cliente):
     
     context = {
         'cliente': cliente,
-        'trabajos': trabajos
+        'trabajos': trabajos,
      }
 
     return render(request, 'helpDesk/clienteTrabajos.html', {'rif_cliente': rif_cliente})

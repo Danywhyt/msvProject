@@ -9,6 +9,7 @@ class Trabajador(models.Model):
     clave = models.CharField(max_length=30)
     numero = models.IntegerField()
 
+
     def __str__(self):
         return '%s %s %s' % (self.id, self.nombre, self.clave)
         
@@ -16,8 +17,9 @@ class Trabajador(models.Model):
 class Cliente(models.Model):
     nombre = models.CharField(max_length=200)
     rif = models.CharField(max_length=100)
-    numero = models.IntegerField()
+    numero = models.IntegerField(null=True,blank=True)
     direccion = models.TextField()
+    nombre_encargador = models.TextField(null=True,blank=True)
 
     def __str__(self):
         fiel = [
@@ -53,11 +55,11 @@ class Trabajo(models.Model):
 
 class Bitacora(models.Model):
     fecha_estado = models.DateTimeField(auto_now_add=True)
-    comentario = models.TextField()
-    monto = models.IntegerField()
+    comentario = models.TextField(null=True, blank=True)
+    monto = models.IntegerField(null=True, blank=True)
     id_trabajador = models.ForeignKey(User)
     id_trabajo = models.ForeignKey(Trabajo, null=True, blank=True, on_delete=models.CASCADE)
-    id_estado = models.ForeignKey(Estados, null=True, blank=True, on_delete=models.CASCADE)
+    id_estado = models.ForeignKey(Estados,null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return '%s' % self.comentario

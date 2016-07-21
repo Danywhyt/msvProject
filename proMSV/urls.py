@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^logout/',logout_then_login, name='logout'),
 
     url(r'^clienteComplete/$', ClienteAutoComplete.as_view(), name='clienteComplete'),
-    url(r'^/$',msv,name='index')
+    url(r'^$',msv,name='index')
     
 
 ]
