@@ -18,6 +18,14 @@ from django.contrib import admin
 from django.contrib.auth.views import login,logout_then_login
 from apps.helpDesk.views import ClienteAutoComplete, msv
 from  django.contrib.auth.decorators import login_required
+
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
+from django.contrib import admin
+admin.autodiscover()
+
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls), 
     url(r'^helpDesk/',include('apps.helpDesk.urls',namespace='helpDesk')),
@@ -26,8 +34,9 @@ urlpatterns = [
     url(r'^logout/',logout_then_login, name='logout'),
 
     url(r'^clienteComplete/$', ClienteAutoComplete.as_view(), name='clienteComplete'),
-    url(r'^$',msv,name='index')
+    url(r'^$',msv,name='index'),
+]
     
 
-]
- 
+
+urlpatterns += staticfiles_urlpatterns()

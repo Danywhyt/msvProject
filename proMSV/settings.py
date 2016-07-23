@@ -121,13 +121,48 @@ USE_L10N = True
 USE_TZ = True
 
 
+
+
+
+
+
+
+
+
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-
+# STATICFILES_DIRS = ('/home/msvcacom/ProyMSV/',)
+# STATIC_ROOT = '/home/msvcacom/ProyMSV/static/'
+# STATIC_URL = '/static/'
+PROJECT_DIR = os.path.dirname(__file__)
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfile2')
+STATIC_URL = '/staticfile2/'
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(STATIC_ROOT, 'static'),
+    )
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+ADMIN_MEDIA_PREFIX = '/staticfile2/admin/''''
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(PROJECT_ROOT,)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = os.path.join(os.path.join(PROJECT_ROOT, 'static'))
+
+TEMPLATE_ROOT = '/home/msvcacom/ProyMsv/template/'
+'''
 
 LOGIN_REDIRECT_URL = reverse_lazy('helpDesk:trabajos')
 
 LOGOUT_REDIRECT_URL = reverse_lazy ('helpDesk:msv')
-
