@@ -122,6 +122,8 @@ def clientes(request):
             form = ClienteForm(request.POST)
 
             if form.is_valid():
+                post = form.save(commit=False)
+                post.rif = request.POST['rif_j'] + request.POST['rif']
                 form.save()
             return redirect('helpDesk:cliente')
     else:
@@ -153,7 +155,7 @@ def trabajosCrear(request):
         return redirect('helpDesk:trabajos')
     else:
         form = TrabajosForm()
-    return render(request, 'helpDesk/TrabajosForm.html', {'form': form})
+    return render(request, 'helpDesk/trabajosForm.html', {'form': form})
 
 
 @login_required
@@ -241,14 +243,15 @@ def bitacora(request, id_trabajo):
     # print(estado)
     if request.method == 'POST':
         form = BitacoraForm(request.POST)
-        print(request.POST)
+        #print(request.POST)
         # print(form)
         # print (cliente)
         if form.is_valid():
             post = form.save(commit=False)
             post.id_trabajo = cliente
-            post.id_trabajador = User.objects.get(pk = request.POST['id_trabajador'])
-
+            post.id_trabajador = User.objects.get( pk = request.POST['id_trabajador'])
+            print ('=======================================================')
+            print(User.objects.get( pk = request.POST['id_trabajador']))
             estado.update(id_estado=request.POST['id_estado'])
             #print('--------------------------------------------------------------')
             #print (cliente.observacion)
