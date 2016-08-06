@@ -14,6 +14,8 @@ import os
 from apps.helpDesk import *
 from django.core.urlresolvers import reverse_lazy
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
+###modificando la ruta por que esta en una parte mas adentro
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
@@ -26,7 +28,7 @@ SECRET_KEY = '2o+6no*7*5@l%)rhni%ixbnawu-d_he*)uf&u6p=--0hn-4xri'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['msvca.com.ve']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -135,7 +137,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # STATICFILES_DIRS = ('/home/msvcacom/ProyMSV/',)
 # STATIC_ROOT = '/home/msvcacom/ProyMSV/static/'
-STATIC_URL = '/static/'
+
 
 
 '''
@@ -171,3 +173,12 @@ TEMPLATE_ROOT = '/home/msvcacom/ProyMsv/template/'
 LOGIN_REDIRECT_URL = reverse_lazy('helpDesk:trabajos')
 
 LOGOUT_REDIRECT_URL = reverse_lazy ('helpDesk:msv')
+
+STATIC_URL = '/static_in_env/static_root/'
+
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_in_env", "static_root")#'/home/msvcacom/ProyMSV/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static_in_pro", "our_static"),
+    #'home/msvcacom/ProyMSV/static',
+)
